@@ -186,28 +186,24 @@ $(document).ready(function() {
 		$(this).toggleClass('bi-eye bi-eye-slash');
 	});
 
-	// handle form submission
-	$('form').submit(function(event) {
-		event.preventDefault(); // Prevent default form submission
+    // function to show alert and hide it automatically 
+    $('#employeeForm').submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-		showAlert();
-	});
+        // Show the alert modal
+        $('#customAlertMessage').text('Data inserted successfully!');
+        $('#customAlertModal').modal('show');
 
-	// Function to show alert modal
-	function showAlert() {
-		document.getElementById("customAlertMessage").textContent = 'Details saved successfully!';
-		$('#customAlertModal').modal('show');
-	}
+        // Automatically hide the alert modal after 1 second
+        setTimeout(function() {
+            $('#customAlertModal').modal('hide');
+            submitForm(); // Submit the form after hiding the modal
+        }, 1000); // 1000 milliseconds (1 second) delay
+    });
 
-	// Function to handle OK button click in alert modal
-	$('#okButton').click(function() {
-		$('#customAlertModal').modal('hide'); // Hide the modal
-		submitForm(); // Submit the form
-	});
-
-	// Function to submit the form
-	function submitForm() {
-		$('form')[0].submit(); // Submit the form
-	}
-
+    // Function to submit the form
+    function submitForm() {
+        $('#employeeForm').off('submit').submit(); // Submit the form
+    }
+   
 });
