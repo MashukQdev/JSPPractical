@@ -24,7 +24,7 @@
   <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper">
 
-    <form action="EmployeeController" method="POST" onsubmit="showAlert();">
+    <form  id="employeeForm" action="EmployeeController" method="POST">
       <div class="formbold-form-title">
         <h2 class="">Employee Registration Form</h2>
         <span class="hestrick-note">(Note: * indicate required field)</span>
@@ -73,20 +73,13 @@
 </div>
 
 <!-- Modal HTML For Customized Alert-->
-<div class="modal fade" id="customAlertModal" tabindex="-1" role="dialog" aria-labelledby="customAlertModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="customAlertModalLabel">Alert</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="customAlertMessage">
-        <!-- Alert message will be dynamically inserted here -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="okButton" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+    <div class="modal fade" id="customAlertModal" tabindex="-1" role="dialog" aria-labelledby="customAlertModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="customAlertMessage">
+            <!-- Alert message will be dynamically inserted here -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
