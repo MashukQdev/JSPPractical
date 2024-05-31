@@ -13,7 +13,7 @@ import com.util.DBUtil;
 /**
  * Service class for handling employee database operations.
  * This class includes methods to check for existing usernames and contact numbers,
- * and to add, update, and remove employee details in the database.
+ * and to add and fetch employee details in the database.
  */
 public class EmployeeService {
 
@@ -108,65 +108,43 @@ public class EmployeeService {
 	}
 	
 	/**
-	 * Updates employee details in the database
-	 * @param employeeModel The EmployeeModel object containing the updated details of the employee
-	 * @param oldUsername The old username to identify which record to update
-	 *  @return an integer indicating the success of the operation:
-     *         - Returns 1 if the employee details were successfully updated in the database
-     *         - Returns 0 if the operation failed
+	 * Retrieves a list of all employees from the database.
+	 * This method establishes a connection to the database using the `DBUtil` class,
+	 * executes a query to fetch all employee records, and maps each record to an
+	 * EmployeeModel` object. The `EmployeeModel` objects are then added to a list,
+	 * which is returned to the caller.
+	 * @return List<EmployeeModel> - A list containing `EmployeeModel` objects representing each employee in the database.
 	 */
-	public int updateEmployeeDetails(EmployeeModel employeeModel, String oldUsername) {
+	public List<EmployeeModel> getEmployeeDetails() {
 		connection = new DBUtil().getConnection();     // Establishing a database connection
 		
-		int executeQuery = 0;   // Variable to store the execution status of the SQL query
+		List<EmployeeModel> employees = new ArrayList<EmployeeModel>();     // create list to store all employee data
 		
-		// SQL query to insert employee details into the database
-		String query = "update employee set first_name = ?, last_name = ?, user_name = ?, employee_password = ?, address = ?, contact_no = ? where user_name = ?";
+		String query = "select * from employee";   // query to execute
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, employeeModel.getFirstName());
-			statement.setString(2, employeeModel.getLastName());
-			statement.setString(3, employeeModel.getUserName());
-			statement.setString(4, employeeModel.getPassword());
-			statement.setString(5, employeeModel.getAddress());
-			statement.setString(6, employeeModel.getContactNo());
-			statement.setString(7, oldUsername);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				EmployeeModel employeeModel = new EmployeeModel();
+				
+				employeeModel.setEmployeeId(resultSet.getInt("id"));
+				employeeModel.setFirstName(resultSet.getString("first_name"));
+				employeeModel.setLastName(resultSet.getString("last_name"));
+				employeeModel.setUserName(resultSet.getString("user_name"));
+				employeeModel.setPassword(resultSet.getString("employee_password"));
+				employeeModel.setAddress(resultSet.getString("address"));
+				employeeModel.setContactNo(resultSet.getString("contact_no"));
+				
+				employees.add(employeeModel);
+			}
+			connection.close();
 			
-			executeQuery = statement.executeUpdate();
-			connection.close();       // closing the connection
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return executeQuery;	
-	}
-	
-	/**
-	 * Removes employee details from the database
-	 * @param userName The username of the employee to be removed
-	 * @return an integer indicating the success of the operation:
-     *         - Returns 1 if the employee details were successfully removed from the database
-     *         - Returns 0 if the operation failed.
-	 */
-	public int removeEmployeeDetails(String userName) {
-		connection = new DBUtil().getConnection();     // Establishing a database connection
-		
-		int executeQuery = 0;   // Variable to store the execution status of the SQL query
-		
-		String query = "delete from employee where user_name = ? ";
-		
-		try {
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, userName);
-			executeQuery = statement.executeUpdate();
-			connection.close();      // closing the connection
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return executeQuery;
+		return employees;
 	}
 	
 }
-
