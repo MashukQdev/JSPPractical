@@ -84,7 +84,8 @@ if(employeeModel != null) {
                     <td data-label="Password"> <%= employeeModel.getPassword() %> </td>
                     <td data-label="Address"> <%= employeeModel.getAddress() %> </td>
                     <td data-label="Contact No."> <%= employeeModel.getContactNo() %> </td>
-                    <td data-label="Update"><a href="update.jsp?firstname=<%= employeeModel.getFirstName() %>&lastname=<%= employeeModel.getLastName() %>&username=<%= employeeModel.getUserName() %>&password=<%= employeeModel.getPassword() %>&address=<%= employeeModel.getAddress() %>&contactno=<%= employeeModel.getContactNo() %>">Update Data</a></td>
+                    <td data-label="Update"><a href="update.jsp?firstname=<%= employeeModel.getFirstName() %>&lastname=<%= employeeModel.getLastName() %>&username=<%= employeeModel.getUserName() %>&
+                    password=<%= employeeModel.getPassword() %>&address=<%= employeeModel.getAddress() %>&contactno=<%= employeeModel.getContactNo() %>">Update Data</a></td>
                     <td data-label="Remove"><a href="#" class="remove-link" data-username="<%= employeeModel.getUserName() %>">Remove Data</a></td>
                     
                 </tr>
