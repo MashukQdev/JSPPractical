@@ -39,8 +39,6 @@
                     <th>Password</th>
                     <th>Address</th>
                     <th>Contact No.</th>
-                    <th>Update</th>
-                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
