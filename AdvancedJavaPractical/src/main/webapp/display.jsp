@@ -33,18 +33,18 @@ $(document).ready(function() {
 				if(response === 'success') {
 					 $('#customAlertMessage').text('Employee data removed successfully.');
 	                 
-	                 $('#okButton').click(function() {
-	                	 window.location.href = 'registration.jsp';
-	                  });
+	                                 $('#okButton').click(function() {
+	                	         	window.location.href = 'registration.jsp';
+	                  		 });
 				} else {
 					$('#customAlertMessage').text('Failed to remove employee details.');
 				}
 				$('#customAlertModal').modal('show');
 			},
 			error: function() {
-                $('#customAlertMessage').text('Failed to remove employee.');
-                $('#customAlertModal').modal('show');
-            }
+                		$('#customAlertMessage').text('Failed to remove employee.');
+                		$('#customAlertModal').modal('show');
+            		}
 		});
 	});
 });
