@@ -52,6 +52,8 @@ $(document).ready(function() {
 
 </head>
 <body>
+
+<!-- creating object of employee model that is set as attribut by servlet file while redirecting to this jsp file -->
 <%
 EmployeeModel employeeModel = (EmployeeModel) request.getAttribute("employee");
 
@@ -75,6 +77,7 @@ if(employeeModel != null) {
             <tbody>
                 
                 <tr>
+                	<!-- get the data from employee model and showing it to table -->
                     <td data-label="First Name"> <%= employeeModel.getFirstName() %> </td>
                     <td data-label="Last Name"> <%= employeeModel.getLastName() %> </td>
                     <td data-label="User Name"> <%= employeeModel.getUserName() %> </td>
@@ -83,6 +86,7 @@ if(employeeModel != null) {
                     <td data-label="Contact No."> <%= employeeModel.getContactNo() %> </td>
                     <td data-label="Update"><a href="update.jsp?firstname=<%= employeeModel.getFirstName() %>&lastname=<%= employeeModel.getLastName() %>&username=<%= employeeModel.getUserName() %>&password=<%= employeeModel.getPassword() %>&address=<%= employeeModel.getAddress() %>&contactno=<%= employeeModel.getContactNo() %>">Update Data</a></td>
                     <td data-label="Remove"><a href="#" class="remove-link" data-username="<%= employeeModel.getUserName() %>">Remove Data</a></td>
+                    
                 </tr>
                 <%
 					}
